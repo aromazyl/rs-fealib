@@ -60,7 +60,7 @@ impl FromStr for FeaConfig {
                 depends: caps.name("depends").unwrap().as_str().split(",").map(|x| x.to_string()).collect::<Vec<String>>(),
                 args: caps.name("args").unwrap().as_str().to_string(),
             }
-        }).ok_or_else(|| fea_conf.to_string().to_owned())
+        }).ok_or_else(|| fea_conf.to_string().clone())
     }
 }
 
