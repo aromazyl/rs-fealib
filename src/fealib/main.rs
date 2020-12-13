@@ -2,7 +2,7 @@ extern crate rs_fealib;
 use rs_fealib::config::{Config,FeaConfig};
 use rs_fealib::ext_ins::{ExtIns};
 extern crate clap;
-use clap::{Arg, App, SubCommand};
+use clap::{Arg, App};
 use std::io::{self, BufRead};
 
 fn main() {

@@ -16,3 +16,11 @@ murmurhash64 = "*"
 serde = { version = "1.0", features = ["derive"] }
 lazy_static = "*"
 clap = "*"
+
+[[bin]]
+name = 'fe_extractor'
+path = 'src/fealib/main.rs'
+
+[lib]
+name = 'rs_fealib'
+path = "src/fealib/lib.rs"
