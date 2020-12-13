@@ -16,6 +16,12 @@ murmurhash64 = "*"
 serde = { version = "1.0", features = ["derive"] }
 lazy_static = "*"
 clap = "*"
+brpc-rs = "0.1.0"
+prost = "0.5.0"
+bytes = "0.4.12"
+
+[build-dependencies]
+brpc-build = "0.1.0"
 
 [[bin]]
 name = 'fe_extractor'
