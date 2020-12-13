@@ -4,17 +4,17 @@
 // Distributed under terms of the MIT license.
 //
 
-mod config;
-mod fe_extract;
+pub mod config;
+pub mod fe_extract;
 
 #[path = "./extract_impls/combine.rs"]
-mod combine;
+pub mod combine;
 
 #[path = "./extract_impls/direct.rs"]
-mod direct;
+pub mod direct;
 
 #[path = "./extract_impls/ext_ins.rs"]
-mod ext_ins;
+pub mod ext_ins;
 
 #[macro_use]
 extern crate lazy_static;

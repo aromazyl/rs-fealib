@@ -13,14 +13,14 @@ use ::lru::LruCache;
 use std::io::BufReader;
 use std::io::BufRead;
 
-struct ExtIns {
-    cache: LruCache<String, Vec<String>>,
-    fe_exts: Vec<Box<FeaExtMethod>>,
-    fe_confs: Vec<FeaConfig>,
+pub struct ExtIns {
+    pub cache: LruCache<String, Vec<String>>,
+    pub fe_exts: Vec<Box<FeaExtMethod>>,
+    pub fe_confs: Vec<FeaConfig>,
 }
 
 impl ExtIns {
-    fn new(conf: &Config) -> ExtIns {
+    pub fn new(conf: &Config) -> ExtIns {
         let mut fe_confs: Vec<FeaConfig> = vec![];
         let mut fe_exts: Vec<Box<FeaExtMethod>> = vec![];
         let f = std::fs::File::open(conf.feature_list_conf.clone()).unwrap();
@@ -43,7 +43,7 @@ impl ExtIns {
         }
     }
 
-    fn compute(&mut self, ins: &Vec<String>, conf: &Config, buf: &'static mut String) -> bool {
+    pub fn compute(&mut self, ins: &Vec<String>, conf: &Config, buf: &mut String) -> bool {
         buf.clear();
         // show click
         buf.push_str(ins[ins.len()-1].as_str());

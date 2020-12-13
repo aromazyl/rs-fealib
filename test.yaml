@@ -1,0 +1,4 @@
+cache_size: 100
+fe_tokens: ['a', 'b', 'c', 'd', e, f, show_click]
+add_tokens: ['a', 'b']
+feature_list_conf: feature_list_wise.conf
