@@ -18,6 +18,9 @@ impl FeaExtMethod for DirectMethod {
         }
         let idx = config.fe_tokens.iter().position(|x| x == &fea_conf.depends[0]).unwrap();
         cache.put(fea_conf.name.clone(), vec![tokens[idx].to_string()]);
+        if tokens[idx].as_str() == "-" {
+            return Ok(vec![])
+        }
         Ok(vec![murmur_hash64a(tokens[idx].as_bytes(), 0) ^ (((fea_conf.slot_id as u64) << 32) as u64)])
     }
 }
