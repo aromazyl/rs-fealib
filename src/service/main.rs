@@ -16,6 +16,7 @@ use futures::Future;
 use futures::sync::oneshot;
 use grpcio::{Environment, RpcContext, ServerBuilder, UnarySink};
 use rs_fealib::engine::Engine;
+use proto::feature::FeaDef;
 
 struct PredictorService {
 

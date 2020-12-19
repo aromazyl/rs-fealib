@@ -7,6 +7,10 @@
 pub mod config;
 pub mod fe_extract;
 
+extern crate futures;
+extern crate grpcio;
+extern crate protobuf;
+
 #[path = "./extract_impls/combine.rs"]
 pub mod combine;
 
@@ -18,6 +22,13 @@ pub mod ext_ins;
 
 #[path = "./engine/engine.rs"]
 pub mod engine;
+
+#[path = "./proto/feature.rs"]
+pub mod feature;
+
+#[path = "./proto/feature_grpc.rs"]
+pub mod feature_grpc;
+
 
 #[macro_use]
 extern crate lazy_static;
