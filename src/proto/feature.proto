@@ -1,0 +1,39 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "io.grpc.feature.galaxy";
+option java_outer_classname = "FeatureProto";
+option objc_class_prefix = "HLW";
+package galaxy;
+
+message FeaDef {
+  string name = 1;
+  string value = 2;
+}
+
+message MulFeaDef {
+  FeaDef features = 1;
+}
+
+message Score {
+  int32 dim = 1;
+  float val = 2;
+}
+
+message MulScore {
+  Score score = 1;
+}
+
+message GalaxyRequest {
+  string sid = 1;
+  int32 version = 2;
+  MulFeaDef feas = 3;
+}
+
+message GalaxyResponse {
+  string sid = 1;
+  MulScore scores = 2;
+}
+
+service Galaxy {
+  rpc Send (GalaxyRequest) returns (GalaxyResponse);
+}

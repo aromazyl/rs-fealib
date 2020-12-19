@@ -3,11 +3,11 @@ name = "rs-fealib"
 version = "0.1.0"
 authors = ["zhangyule <zyl2336709@gmail.com>"]
 edition = "2018"
+build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = "*"
 serde_yaml = "0.8"
 lru = "*"
 clippy = "*"
@@ -16,12 +16,37 @@ murmurhash64 = "*"
 serde = { version = "1.0", features = ["derive"] }
 lazy_static = "*"
 clap = "*"
-brpc-rs = "0.1.0"
-prost = "0.5.0"
-bytes = "0.4.12"
+prost = "0.6"
+tokio = { version = "0.2", features = ["rt-threaded", "time", "stream", "fs", "macros", "uds"] }
+async-stream = "0.2"
+tower = "0.3"
+rand = "0.7"
+serde_json = "1.0"
+tracing = "0.1.16"
+tracing-subscriber = { version = "0.2", features = ["tracing-log"] }
+tracing-attributes = "0.1"
+tracing-futures = "0.2"
+# Required for wellknown types
+prost-types = "0.6"
+hyper = "0.13"
+warp = { version = "0.2", default-features = false }
+http = "0.2"
+http-body = "0.3"
+pin-project = "0.4.17"
+listenfd = "0.3"
+futures = "0.1.16"
+grpcio = "0.4.3"
+protobuf = "~2"
+grpcio-proto = "*"
+log = "0.3"
+slog = "2.0"
+slog-async = "2.1"
+slog-stdlog = "3.0"
+slog-scope = "4.0"
+slog-term = "2.2"
 
 [build-dependencies]
-brpc-build = "0.1.0"
+protoc-grpcio = "3.0.0"
 
 [[bin]]
 name = 'fe_extractor'
@@ -30,3 +55,7 @@ path = 'src/fealib/main.rs'
 [lib]
 name = 'rs_fealib'
 path = "src/fealib/lib.rs"
+
+[[bin]]
+name = 'service'
+path = 'src/service/main.rs'
