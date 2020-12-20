@@ -11,6 +11,7 @@ extern crate futures;
 extern crate grpcio;
 extern crate protobuf;
 
+
 #[path = "./extract_impls/combine.rs"]
 pub mod combine;
 
@@ -23,11 +24,14 @@ pub mod ext_ins;
 #[path = "./engine/engine.rs"]
 pub mod engine;
 
-#[path = "./proto/feature.rs"]
+#[path = "../proto/feature.rs"]
 pub mod feature;
 
-#[path = "./proto/feature_grpc.rs"]
+#[path = "../proto/feature_grpc.rs"]
 pub mod feature_grpc;
+
+#[path = "./engine/lr_engine.rs"]
+pub mod lr_engine;
 
 
 #[macro_use]

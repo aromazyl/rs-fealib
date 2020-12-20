@@ -405,6 +405,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "134951f4028bdadb9b84baf4232681efbf277da25144b9b0ad65df75946c422b"
 
 [[package]]
+name = "dubble"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "63a3d13d3f3bbd91ac5e915f6dfccb5f999586c93e4c8f3d414b63a86a7623ef"
+
+[[package]]
 name = "either"
 version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1557,6 +1563,7 @@ dependencies = [
  "async-stream",
  "clap",
  "clippy",
+ "dubble",
  "futures",
  "grpcio 0.6.0",
  "grpcio-proto",

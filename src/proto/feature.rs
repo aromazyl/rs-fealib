@@ -227,7 +227,7 @@ impl ::protobuf::reflect::ProtobufValue for FeaDef {
 #[derive(PartialEq,Clone,Default)]
 pub struct MulFeaDef {
     // message fields
-    pub features: ::protobuf::SingularPtrField<FeaDef>,
+    pub features: ::protobuf::RepeatedField<FeaDef>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -244,37 +244,29 @@ impl MulFeaDef {
         ::std::default::Default::default()
     }
 
-    // .galaxy.FeaDef features = 1;
+    // repeated .galaxy.FeaDef features = 1;
 
 
-    pub fn get_features(&self) -> &FeaDef {
-        self.features.as_ref().unwrap_or_else(|| <FeaDef as ::protobuf::Message>::default_instance())
+    pub fn get_features(&self) -> &[FeaDef] {
+        &self.features
     }
     pub fn clear_features(&mut self) {
         self.features.clear();
     }
 
-    pub fn has_features(&self) -> bool {
-        self.features.is_some()
-    }
-
     // Param is passed by value, moved
-    pub fn set_features(&mut self, v: FeaDef) {
-        self.features = ::protobuf::SingularPtrField::some(v);
+    pub fn set_features(&mut self, v: ::protobuf::RepeatedField<FeaDef>) {
+        self.features = v;
     }
 
     // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_features(&mut self) -> &mut FeaDef {
-        if self.features.is_none() {
-            self.features.set_default();
-        }
-        self.features.as_mut().unwrap()
+    pub fn mut_features(&mut self) -> &mut ::protobuf::RepeatedField<FeaDef> {
+        &mut self.features
     }
 
     // Take field
-    pub fn take_features(&mut self) -> FeaDef {
-        self.features.take().unwrap_or_else(|| FeaDef::new())
+    pub fn take_features(&mut self) -> ::protobuf::RepeatedField<FeaDef> {
+        ::std::mem::replace(&mut self.features, ::protobuf::RepeatedField::new())
     }
 }
 
@@ -293,7 +285,7 @@ impl ::protobuf::Message for MulFeaDef {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.features)?;
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.features)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -307,21 +299,21 @@ impl ::protobuf::Message for MulFeaDef {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if let Some(ref v) = self.features.as_ref() {
-            let len = v.compute_size();
+        for value in &self.features {
+            let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-        }
+        };
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        if let Some(ref v) = self.features.as_ref() {
+        for v in &self.features {
             os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
-        }
+        };
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -360,7 +352,7 @@ impl ::protobuf::Message for MulFeaDef {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<FeaDef>>(
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<FeaDef>>(
                 "features",
                 |m: &MulFeaDef| { &m.features },
                 |m: &mut MulFeaDef| { &mut m.features },
@@ -588,7 +580,7 @@ impl ::protobuf::reflect::ProtobufValue for Score {
 #[derive(PartialEq,Clone,Default)]
 pub struct MulScore {
     // message fields
-    pub score: ::protobuf::SingularPtrField<Score>,
+    pub score: ::protobuf::RepeatedField<Score>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -605,37 +597,29 @@ impl MulScore {
         ::std::default::Default::default()
     }
 
-    // .galaxy.Score score = 1;
+    // repeated .galaxy.Score score = 1;
 
 
-    pub fn get_score(&self) -> &Score {
-        self.score.as_ref().unwrap_or_else(|| <Score as ::protobuf::Message>::default_instance())
+    pub fn get_score(&self) -> &[Score] {
+        &self.score
     }
     pub fn clear_score(&mut self) {
         self.score.clear();
     }
 
-    pub fn has_score(&self) -> bool {
-        self.score.is_some()
-    }
-
     // Param is passed by value, moved
-    pub fn set_score(&mut self, v: Score) {
-        self.score = ::protobuf::SingularPtrField::some(v);
+    pub fn set_score(&mut self, v: ::protobuf::RepeatedField<Score>) {
+        self.score = v;
     }
 
     // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_score(&mut self) -> &mut Score {
-        if self.score.is_none() {
-            self.score.set_default();
-        }
-        self.score.as_mut().unwrap()
+    pub fn mut_score(&mut self) -> &mut ::protobuf::RepeatedField<Score> {
+        &mut self.score
     }
 
     // Take field
-    pub fn take_score(&mut self) -> Score {
-        self.score.take().unwrap_or_else(|| Score::new())
+    pub fn take_score(&mut self) -> ::protobuf::RepeatedField<Score> {
+        ::std::mem::replace(&mut self.score, ::protobuf::RepeatedField::new())
     }
 }
 
@@ -654,7 +638,7 @@ impl ::protobuf::Message for MulScore {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.score)?;
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.score)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -668,21 +652,21 @@ impl ::protobuf::Message for MulScore {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if let Some(ref v) = self.score.as_ref() {
-            let len = v.compute_size();
+        for value in &self.score {
+            let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-        }
+        };
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        if let Some(ref v) = self.score.as_ref() {
+        for v in &self.score {
             os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
-        }
+        };
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -721,7 +705,7 @@ impl ::protobuf::Message for MulScore {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Score>>(
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Score>>(
                 "score",
                 |m: &MulScore| { &m.score },
                 |m: &mut MulScore| { &mut m.score },
@@ -764,7 +748,7 @@ pub struct GalaxyRequest {
     // message fields
     pub sid: ::std::string::String,
     pub version: i32,
-    pub feas: ::protobuf::SingularPtrField<MulFeaDef>,
+    pub feas: ::protobuf::RepeatedField<MulFeaDef>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -822,37 +806,29 @@ impl GalaxyRequest {
         self.version = v;
     }
 
-    // .galaxy.MulFeaDef feas = 3;
+    // repeated .galaxy.MulFeaDef feas = 3;
 
 
-    pub fn get_feas(&self) -> &MulFeaDef {
-        self.feas.as_ref().unwrap_or_else(|| <MulFeaDef as ::protobuf::Message>::default_instance())
+    pub fn get_feas(&self) -> &[MulFeaDef] {
+        &self.feas
     }
     pub fn clear_feas(&mut self) {
         self.feas.clear();
     }
 
-    pub fn has_feas(&self) -> bool {
-        self.feas.is_some()
-    }
-
     // Param is passed by value, moved
-    pub fn set_feas(&mut self, v: MulFeaDef) {
-        self.feas = ::protobuf::SingularPtrField::some(v);
+    pub fn set_feas(&mut self, v: ::protobuf::RepeatedField<MulFeaDef>) {
+        self.feas = v;
     }
 
     // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_feas(&mut self) -> &mut MulFeaDef {
-        if self.feas.is_none() {
-            self.feas.set_default();
-        }
-        self.feas.as_mut().unwrap()
+    pub fn mut_feas(&mut self) -> &mut ::protobuf::RepeatedField<MulFeaDef> {
+        &mut self.feas
     }
 
     // Take field
-    pub fn take_feas(&mut self) -> MulFeaDef {
-        self.feas.take().unwrap_or_else(|| MulFeaDef::new())
+    pub fn take_feas(&mut self) -> ::protobuf::RepeatedField<MulFeaDef> {
+        ::std::mem::replace(&mut self.feas, ::protobuf::RepeatedField::new())
     }
 }
 
@@ -881,7 +857,7 @@ impl ::protobuf::Message for GalaxyRequest {
                     self.version = tmp;
                 },
                 3 => {
-                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.feas)?;
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.feas)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -901,10 +877,10 @@ impl ::protobuf::Message for GalaxyRequest {
         if self.version != 0 {
             my_size += ::protobuf::rt::value_size(2, self.version, ::protobuf::wire_format::WireTypeVarint);
         }
-        if let Some(ref v) = self.feas.as_ref() {
-            let len = v.compute_size();
+        for value in &self.feas {
+            let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-        }
+        };
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
@@ -917,11 +893,11 @@ impl ::protobuf::Message for GalaxyRequest {
         if self.version != 0 {
             os.write_int32(2, self.version)?;
         }
-        if let Some(ref v) = self.feas.as_ref() {
+        for v in &self.feas {
             os.write_tag(3, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
-        }
+        };
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -970,7 +946,7 @@ impl ::protobuf::Message for GalaxyRequest {
                 |m: &GalaxyRequest| { &m.version },
                 |m: &mut GalaxyRequest| { &mut m.version },
             ));
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<MulFeaDef>>(
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<MulFeaDef>>(
                 "feas",
                 |m: &GalaxyRequest| { &m.feas },
                 |m: &mut GalaxyRequest| { &mut m.feas },
@@ -1229,12 +1205,12 @@ impl ::protobuf::reflect::ProtobufValue for GalaxyResponse {
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\rfeature.proto\x12\x06galaxy\"2\n\x06FeaDef\x12\x12\n\x04name\x18\x01\
     \x20\x01(\tR\x04name\x12\x14\n\x05value\x18\x02\x20\x01(\tR\x05value\"7\
-    \n\tMulFeaDef\x12*\n\x08features\x18\x01\x20\x01(\x0b2\x0e.galaxy.FeaDef\
+    \n\tMulFeaDef\x12*\n\x08features\x18\x01\x20\x03(\x0b2\x0e.galaxy.FeaDef\
     R\x08features\"+\n\x05Score\x12\x10\n\x03dim\x18\x01\x20\x01(\x05R\x03di\
     m\x12\x10\n\x03val\x18\x02\x20\x01(\x02R\x03val\"/\n\x08MulScore\x12#\n\
-    \x05score\x18\x01\x20\x01(\x0b2\r.galaxy.ScoreR\x05score\"b\n\rGalaxyReq\
+    \x05score\x18\x01\x20\x03(\x0b2\r.galaxy.ScoreR\x05score\"b\n\rGalaxyReq\
     uest\x12\x10\n\x03sid\x18\x01\x20\x01(\tR\x03sid\x12\x18\n\x07version\
-    \x18\x02\x20\x01(\x05R\x07version\x12%\n\x04feas\x18\x03\x20\x01(\x0b2\
+    \x18\x02\x20\x01(\x05R\x07version\x12%\n\x04feas\x18\x03\x20\x03(\x0b2\
     \x11.galaxy.MulFeaDefR\x04feas\"L\n\x0eGalaxyResponse\x12\x10\n\x03sid\
     \x18\x01\x20\x01(\tR\x03sid\x12(\n\x06scores\x18\x02\x20\x01(\x0b2\x10.g\
     alaxy.MulScoreR\x06scores2?\n\x06Galaxy\x125\n\x04Send\x12\x15.galaxy.Ga\

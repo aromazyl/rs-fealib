@@ -12,6 +12,7 @@ use crate::direct::DirectMethod;
 use ::lru::LruCache;
 use std::io::BufReader;
 use std::io::BufRead;
+use std::collections::HashMap;
 
 pub struct ExtIns {
     pub cache: LruCache<String, Vec<String>>,
@@ -43,6 +44,19 @@ impl ExtIns {
         }
     }
 
+    pub fn extract(&mut self, ins: &Vec<String>, conf: &Config, buf: &mut HashMap<i32, Vec<u64>>) -> bool {
+        buf.clear();
+        for (index, method) in self.fe_exts.iter().enumerate() {
+            if let Ok(coded_num) = method.encode(&ins, &conf, &self.fe_confs[index], &mut self.cache)  {
+                if self.fe_confs[index].is_output {
+                    buf.insert(self.fe_confs[index].slot_id, coded_num);
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
     pub fn compute(&mut self, ins: &Vec<String>, conf: &Config, buf: &mut String) -> bool {
         buf.clear();
         // show click
@@ -50,9 +64,9 @@ impl ExtIns {
         buf.push(' ');
 
         for (index, method) in self.fe_exts.iter().enumerate() {
-            if let Ok(coded_string) = method.to_string(&ins, &conf, &self.fe_confs[index], &mut self.cache)  {
+            if let Ok(coded_num) = method.encode(&ins, &conf, &self.fe_confs[index], &mut self.cache)  {
                 if self.fe_confs[index].is_output {
-                    for code in coded_string {
+                    for code in coded_num {
                         buf.push_str(code.to_string().as_str());
                         buf.push(':');
                         buf.push_str(self.fe_confs[index].slot_id.to_string().as_str());

@@ -11,7 +11,7 @@ message FeaDef {
 }
 
 message MulFeaDef {
-  FeaDef features = 1;
+  repeated FeaDef features = 1;
 }
 
 message Score {
@@ -20,13 +20,13 @@ message Score {
 }
 
 message MulScore {
-  Score score = 1;
+  repeated Score score = 1;
 }
 
 message GalaxyRequest {
   string sid = 1;
   int32 version = 2;
-  MulFeaDef feas = 3;
+  repeated MulFeaDef feas = 3;
 }
 
 message GalaxyResponse {

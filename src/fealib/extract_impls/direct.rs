@@ -11,7 +11,7 @@ use ::murmurhash64::murmur_hash64a;
 
 pub struct DirectMethod;
 impl FeaExtMethod for DirectMethod {
-    fn to_string(&self, tokens: &Vec<String>, config: &Config,
+    fn encode(&self, tokens: &Vec<String>, config: &Config,
         fea_conf: &FeaConfig, cache: &mut LruCache<String, Vec<String>>) -> Result<Vec<u64>, String> {
         if tokens.len() != config.fe_tokens.len() {
             return Err("tokens length not equal to fe length".to_string());
