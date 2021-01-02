@@ -8,7 +8,6 @@ pub mod config;
 pub mod fe_extract;
 
 extern crate futures;
-extern crate grpcio;
 extern crate protobuf;
 
 

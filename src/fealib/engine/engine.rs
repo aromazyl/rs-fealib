@@ -9,7 +9,7 @@ use std::io::{self, BufRead};
 
 pub trait Engine {
 	fn load_model(&mut self, conf: &String, version: &String);
-	fn predict(&self, ins: &[MulFeaDef]) -> MulScore;
+	fn predict(&mut self, ins: &[MulFeaDef], sid: &String) -> MulScore;
 }
 
 #[cfg(test)]

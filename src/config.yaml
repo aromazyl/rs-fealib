@@ -1,0 +1,4 @@
+cache_size : 1000
+fe_tokens : ["A", "B", "C"]
+add_tokens : ["C"]
+feature_list_conf : "feature_list_wise.conf"

@@ -14,6 +14,7 @@ use std::io::BufReader;
 use std::io::BufRead;
 use std::collections::HashMap;
 
+#[derive(Clone)]
 pub struct ExtIns {
     pub cache: LruCache<String, Vec<String>>,
     pub fe_exts: Vec<Box<FeaExtMethod>>,
@@ -42,6 +43,20 @@ impl ExtIns {
             fe_exts: fe_exts,
             fe_confs: fe_confs,
         }
+    }
+
+    pub fn hash(&mut self, ins: &HashMap<String, String>, buf: &mut HashMap<i32, Vec<u64>>) -> bool {
+        buf.clear();
+        for (index, method) in self.fe_exts.iter().enumerate() {
+            if let Ok(coded_num) = method.hash(&ins, &self.fe_confs[index], &mut self.cache)  {
+                if self.fe_confs[index].is_output {
+                    buf.insert(self.fe_confs[index].slot_id, coded_num);
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     pub fn extract(&mut self, ins: &Vec<String>, conf: &Config, buf: &mut HashMap<i32, Vec<u64>>) -> bool {
