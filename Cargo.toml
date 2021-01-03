@@ -9,7 +9,6 @@ build = "build.rs"
 
 [dependencies]
 serde_yaml = "0.8"
-lru = "*"
 clippy = "*"
 regex = "1"
 murmurhash64 = "*"
@@ -35,19 +34,22 @@ http-body = "0.3"
 pin-project = "0.4.17"
 listenfd = "0.3"
 futures = "0.3.5"
-protobuf = "~2"
 log = "0.3"
 slog = "2.0"
 slog-async = "2.1"
 slog-stdlog = "3.0"
 slog-scope = "4.0"
 slog-term = "2.2"
+tls-api-stub = "*"
 dubble = "*"
-grpcio = "*"
-grpcio-proto = "*"
+grpc = "*"
+grpc-protobuf = "*"
+protobuf = "2"
+httpbis         = { git = "https://github.com/stepancheg/rust-http2" }
 
 [build-dependencies]
-protoc-grpcio = "3.0.0"
+# protoc-rust-grpc = { git = "https://github.com/stepancheg/grpc-rust" }
+protoc-rust-grpc = "*"
 
 [[bin]]
 name = 'fe_extractor'
@@ -56,6 +58,7 @@ path = 'src/fealib/main.rs'
 [lib]
 name = 'rs_fealib'
 path = "src/fealib/lib.rs"
+test = false
 
 [[bin]]
 name = 'service'

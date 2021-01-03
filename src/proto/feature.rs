@@ -17,7 +17,7 @@
 #![allow(trivial_casts)]
 #![allow(unused_imports)]
 #![allow(unused_results)]
-//! Generated file from `feature.proto`
+//! Generated file from `src/proto/feature.proto`
 
 /// Generated files are compatible only with the same version
 /// of protobuf runtime.
@@ -1203,19 +1203,19 @@ impl ::protobuf::reflect::ProtobufValue for GalaxyResponse {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\rfeature.proto\x12\x06galaxy\"2\n\x06FeaDef\x12\x12\n\x04name\x18\x01\
-    \x20\x01(\tR\x04name\x12\x14\n\x05value\x18\x02\x20\x01(\tR\x05value\"7\
-    \n\tMulFeaDef\x12*\n\x08features\x18\x01\x20\x03(\x0b2\x0e.galaxy.FeaDef\
-    R\x08features\"+\n\x05Score\x12\x10\n\x03dim\x18\x01\x20\x01(\x05R\x03di\
-    m\x12\x10\n\x03val\x18\x02\x20\x01(\x02R\x03val\"/\n\x08MulScore\x12#\n\
-    \x05score\x18\x01\x20\x03(\x0b2\r.galaxy.ScoreR\x05score\"b\n\rGalaxyReq\
-    uest\x12\x10\n\x03sid\x18\x01\x20\x01(\tR\x03sid\x12\x18\n\x07version\
-    \x18\x02\x20\x01(\x05R\x07version\x12%\n\x04feas\x18\x03\x20\x03(\x0b2\
-    \x11.galaxy.MulFeaDefR\x04feas\"L\n\x0eGalaxyResponse\x12\x10\n\x03sid\
-    \x18\x01\x20\x01(\tR\x03sid\x12(\n\x06scores\x18\x02\x20\x01(\x0b2\x10.g\
-    alaxy.MulScoreR\x06scores2?\n\x06Galaxy\x125\n\x04Send\x12\x15.galaxy.Ga\
-    laxyRequest\x1a\x16.galaxy.GalaxyResponseB.\n\x16io.grpc.feature.galaxyB\
-    \x0cFeatureProtoP\x01\xa2\x02\x03HLWb\x06proto3\
+    \n\x17src/proto/feature.proto\x12\x06galaxy\"2\n\x06FeaDef\x12\x12\n\x04\
+    name\x18\x01\x20\x01(\tR\x04name\x12\x14\n\x05value\x18\x02\x20\x01(\tR\
+    \x05value\"7\n\tMulFeaDef\x12*\n\x08features\x18\x01\x20\x03(\x0b2\x0e.g\
+    alaxy.FeaDefR\x08features\"+\n\x05Score\x12\x10\n\x03dim\x18\x01\x20\x01\
+    (\x05R\x03dim\x12\x10\n\x03val\x18\x02\x20\x01(\x02R\x03val\"/\n\x08MulS\
+    core\x12#\n\x05score\x18\x01\x20\x03(\x0b2\r.galaxy.ScoreR\x05score\"b\n\
+    \rGalaxyRequest\x12\x10\n\x03sid\x18\x01\x20\x01(\tR\x03sid\x12\x18\n\
+    \x07version\x18\x02\x20\x01(\x05R\x07version\x12%\n\x04feas\x18\x03\x20\
+    \x03(\x0b2\x11.galaxy.MulFeaDefR\x04feas\"L\n\x0eGalaxyResponse\x12\x10\
+    \n\x03sid\x18\x01\x20\x01(\tR\x03sid\x12(\n\x06scores\x18\x02\x20\x01(\
+    \x0b2\x10.galaxy.MulScoreR\x06scores2?\n\x06Galaxy\x125\n\x04Send\x12\
+    \x15.galaxy.GalaxyRequest\x1a\x16.galaxy.GalaxyResponseB.\n\x16io.grpc.f\
+    eature.galaxyB\x0cFeatureProtoP\x01\xa2\x02\x03HLWb\x06proto3\
 ";
 
 static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;

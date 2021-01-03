@@ -5,6 +5,8 @@
 #![allow(unknown_lints)]
 #![allow(clippy::all)]
 
+#![cfg_attr(rustfmt, rustfmt_skip)]
+
 #![allow(box_pointers)]
 #![allow(dead_code)]
 #![allow(missing_docs)]
@@ -16,54 +18,62 @@
 #![allow(unused_imports)]
 #![allow(unused_results)]
 
-const METHOD_GALAXY_SEND: ::grpcio::Method<super::feature::GalaxyRequest, super::feature::GalaxyResponse> = ::grpcio::Method {
-    ty: ::grpcio::MethodType::Unary,
-    name: "/galaxy.Galaxy/Send",
-    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
-    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
-};
 
-#[derive(Clone)]
+// server interface
+
+pub trait Galaxy {
+    fn send(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::feature::GalaxyRequest>, resp: ::grpc::ServerResponseUnarySink<super::feature::GalaxyResponse>) -> ::grpc::Result<()>;
+}
+
+// client
+
 pub struct GalaxyClient {
-    client: ::grpcio::Client,
+    grpc_client: ::std::sync::Arc<::grpc::Client>,
+}
+
+impl ::grpc::ClientStub for GalaxyClient {
+    fn with_client(grpc_client: ::std::sync::Arc<::grpc::Client>) -> Self {
+        GalaxyClient {
+            grpc_client: grpc_client,
+        }
+    }
 }
 
 impl GalaxyClient {
-    pub fn new(channel: ::grpcio::Channel) -> Self {
-        GalaxyClient {
-            client: ::grpcio::Client::new(channel),
-        }
-    }
-
-    pub fn send_opt(&self, req: &super::feature::GalaxyRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<super::feature::GalaxyResponse> {
-        self.client.unary_call(&METHOD_GALAXY_SEND, req, opt)
-    }
-
-    pub fn send(&self, req: &super::feature::GalaxyRequest) -> ::grpcio::Result<super::feature::GalaxyResponse> {
-        self.send_opt(req, ::grpcio::CallOption::default())
-    }
-
-    pub fn send_async_opt(&self, req: &super::feature::GalaxyRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::feature::GalaxyResponse>> {
-        self.client.unary_call_async(&METHOD_GALAXY_SEND, req, opt)
-    }
-
-    pub fn send_async(&self, req: &super::feature::GalaxyRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::feature::GalaxyResponse>> {
-        self.send_async_opt(req, ::grpcio::CallOption::default())
-    }
-    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
-        self.client.spawn(f)
+    pub fn send(&self, o: ::grpc::RequestOptions, req: super::feature::GalaxyRequest) -> ::grpc::SingleResponse<super::feature::GalaxyResponse> {
+        let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
+            name: ::grpc::rt::StringOrStatic::Static("/galaxy.Galaxy/Send"),
+            streaming: ::grpc::rt::GrpcStreaming::Unary,
+            req_marshaller: ::grpc::rt::ArcOrStatic::Static(&::grpc_protobuf::MarshallerProtobuf),
+            resp_marshaller: ::grpc::rt::ArcOrStatic::Static(&::grpc_protobuf::MarshallerProtobuf),
+        });
+        self.grpc_client.call_unary(o, req, descriptor)
     }
 }
 
-pub trait Galaxy {
-    fn send(&mut self, ctx: ::grpcio::RpcContext, req: super::feature::GalaxyRequest, sink: ::grpcio::UnarySink<super::feature::GalaxyResponse>);
-}
+// server
 
-pub fn create_galaxy<S: Galaxy + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
-    let mut builder = ::grpcio::ServiceBuilder::new();
-    let mut instance = s;
-    builder = builder.add_unary_handler(&METHOD_GALAXY_SEND, move |ctx, req, resp| {
-        instance.send(ctx, req, resp)
-    });
-    builder.build()
+pub struct GalaxyServer;
+
+
+impl GalaxyServer {
+    pub fn new_service_def<H : Galaxy + 'static + Sync + Send + 'static>(handler: H) -> ::grpc::rt::ServerServiceDefinition {
+        let handler_arc = ::std::sync::Arc::new(handler);
+        ::grpc::rt::ServerServiceDefinition::new("/galaxy.Galaxy",
+            vec![
+                ::grpc::rt::ServerMethod::new(
+                    ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
+                        name: ::grpc::rt::StringOrStatic::Static("/galaxy.Galaxy/Send"),
+                        streaming: ::grpc::rt::GrpcStreaming::Unary,
+                        req_marshaller: ::grpc::rt::ArcOrStatic::Static(&::grpc_protobuf::MarshallerProtobuf),
+                        resp_marshaller: ::grpc::rt::ArcOrStatic::Static(&::grpc_protobuf::MarshallerProtobuf),
+                    }),
+                    {
+                        let handler_copy = handler_arc.clone();
+                        ::grpc::rt::MethodHandlerUnary::new(move |ctx, req, resp| (*handler_copy).send(ctx, req, resp))
+                    },
+                ),
+            ],
+        )
+    }
 }

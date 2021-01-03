@@ -10,14 +10,13 @@ extern crate log;
 use log::{info, trace, warn};
 
 
-#[derive(Clone)]
 pub struct LrEngine {
 	extor : ExtIns,
     fea_weighteds : DoubleBuffered<HashMap<u64, f32>>,
     cur_version : String,
 }
 
-impl Engine for LrEngine {
+impl LrEngine {
     // fn new(config: &Config) -> Self {
     //     LrEngine {
     //         extor: ExtIns::new(config),
@@ -27,7 +26,7 @@ impl Engine for LrEngine {
     //     }
     // }
 
-	fn load_model(&mut self, conf: &String, version: &String) {
+	pub fn load_model(&mut self, conf: &String, version: &String) {
         if self.cur_version == version.clone() {
             return;
         }
@@ -47,7 +46,7 @@ impl Engine for LrEngine {
         self.fea_weighteds.update();
     }
 
-    fn predict(&mut self, ins: &[MulFeaDef], sid: &String) -> MulScore {
+    pub fn predict(&mut self, ins: &[MulFeaDef], sid: &String) -> MulScore {
         let mut scores = MulScore::new();
         let mut fea_vec = HashMap::<String, String>::new();
         let mut hash_res = HashMap::<i32, Vec<u64>>::new();

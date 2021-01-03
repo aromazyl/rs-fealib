@@ -9,22 +9,20 @@ use crate::fe_extract::FeaExtMethod;
 use crate::config::{Config, FeaConfig};
 use crate::combine::CombineMethod;
 use crate::direct::DirectMethod;
-use ::lru::LruCache;
 use std::io::BufReader;
 use std::io::BufRead;
 use std::collections::HashMap;
 
-#[derive(Clone)]
 pub struct ExtIns {
-    pub cache: LruCache<String, Vec<String>>,
-    pub fe_exts: Vec<Box<FeaExtMethod>>,
+    pub cache: HashMap<String, Vec<String>>,
+    pub fe_exts: Vec<Box<FeaExtMethod + Send>>,
     pub fe_confs: Vec<FeaConfig>,
 }
 
 impl ExtIns {
     pub fn new(conf: &Config) -> ExtIns {
         let mut fe_confs: Vec<FeaConfig> = vec![];
-        let mut fe_exts: Vec<Box<FeaExtMethod>> = vec![];
+        let mut fe_exts: Vec<Box<FeaExtMethod + Send>> = vec![];
         let f = std::fs::File::open(conf.feature_list_conf.clone()).unwrap();
         for line in BufReader::new(f).lines() {
             let line = line.unwrap();
@@ -37,7 +35,7 @@ impl ExtIns {
                 x => panic!(format!("error format {}", x)),
             };
         }
-        let mut cache = LruCache::new(100);
+        let mut cache = HashMap::new();
         ExtIns {
             cache: cache,
             fe_exts: fe_exts,
