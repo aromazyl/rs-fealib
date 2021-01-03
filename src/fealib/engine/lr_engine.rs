@@ -11,9 +11,9 @@ use log::{info, trace, warn};
 
 
 pub struct LrEngine {
-	extor : ExtIns,
-    fea_weighteds : DoubleBuffered<HashMap<u64, f32>>,
-    cur_version : String,
+	pub extor : ExtIns,
+    pub fea_weighteds : DoubleBuffered<HashMap<u64, f32>>,
+    pub cur_version : String,
 }
 
 impl LrEngine {

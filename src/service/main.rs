@@ -74,9 +74,7 @@ fn main() {
 	let mut service = PredictorService {
 		engine: lr_engine,
 	};
-	let ref mut svc = *service.engine.lock().unwrap();
-	svc.load_model(&"./lr_model".to_string(), &"0".to_string());
-	svc = null;
+	(*service.engine.lock().unwrap()).load_model(&"./lr_model".to_string(), &"0".to_string());
 	let _guard = init_log(None);
 	let mut server = grpc::ServerBuilder::<TlsAcceptor>::new();
 	server.http.set_addr(address.parse::<SocketAddr>().unwrap());
