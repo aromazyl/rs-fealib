@@ -40,7 +40,7 @@ impl FeaExtMethod for CombineMethod {
         let res: Vec<u64> = tmp.iter().map(|x| murmur_hash64a(x.as_bytes(), 0) ^ (((fea_conf.slot_id as u64) << 32) as u64)).collect();
         Ok(res)
     }
-    fn hash(&self, tokens: &HashMap<String, String>, fea_conf: &FeaConfig, cache: &mut HashMap<String, Vec<String>>) -> Result<Vec<u64>, String> {
+    fn hash(&self, _: &HashMap<String, String>, fea_conf: &FeaConfig, cache: &mut HashMap<String, Vec<String>>) -> Result<Vec<u64>, String> {
             let mut tmp: Vec<String> = Vec::with_capacity(20);
             for depends_name in &fea_conf.depends {
                 let get_res = cache.get(depends_name);

@@ -9,23 +9,19 @@
 use ::dubble::DoubleBuffered;
 extern crate futures;
 use std::net::SocketAddr;
-#[macro_use]
 extern crate log;
 extern crate rs_fealib;
-use rs_fealib::{config::Config, init_log, lr_engine::LrEngine, engine::Engine};
+use rs_fealib::{config::Config, init_log, lr_engine::LrEngine};
 use std::thread;
-use std::sync::Arc;
 use clap::{Arg, App};
-use futures::prelude::*;
 use grpc::ServerHandlerContext;
 use grpc::ServerRequestSingle;
 use grpc::ServerResponseUnarySink;
-use rs_fealib::feature::{FeaDef, GalaxyRequest, GalaxyResponse};
-use rs_fealib::feature_grpc::{self, Galaxy, GalaxyServer};
+use rs_fealib::feature::{GalaxyRequest, GalaxyResponse};
+use rs_fealib::feature_grpc::{Galaxy, GalaxyServer};
 use rs_fealib::ext_ins::{ExtIns};
 use std::sync::Mutex;
 use tls_api_stub::TlsAcceptor;
-use std::ptr::null;
 
 struct PredictorService {
 	engine: Mutex<LrEngine>,
@@ -65,19 +61,18 @@ fn main() {
 	let yaml_config = matches.value_of("config").unwrap_or("service.yaml").to_string();
 	let address = matches.value_of("address").unwrap_or("127.0.0.1:5021").to_string();
     let config = Config::new(yaml_config).unwrap();
-	let mut ext_ins_helper = ExtIns::new(&config);
-	let mut lr_engine = Mutex::new(LrEngine {
-		extor: ext_ins_helper,
+	let lr_engine = Mutex::new(LrEngine {
+		extor: ExtIns::new(&config),
 		fea_weighteds: DoubleBuffered::default(),
 		cur_version: "0".to_string(),
 	});
-	let mut service = PredictorService {
+	let service = PredictorService {
 		engine: lr_engine,
 	};
 	(*service.engine.lock().unwrap()).load_model(&"./lr_model".to_string(), &"0".to_string());
 	let _guard = init_log(None);
 	let mut server = grpc::ServerBuilder::<TlsAcceptor>::new();
-	server.http.set_addr(address.parse::<SocketAddr>().unwrap());
+	server.http.set_addr(address.parse::<SocketAddr>().unwrap()).expect("set address");
 	server.add_service(GalaxyServer::new_service_def(service));
 	let _res = server.build().unwrap();
 	loop {

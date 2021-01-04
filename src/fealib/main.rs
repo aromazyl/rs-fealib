@@ -1,5 +1,5 @@
 extern crate rs_fealib;
-use rs_fealib::config::{Config,FeaConfig};
+use rs_fealib::config::{Config};
 use rs_fealib::ext_ins::{ExtIns};
 extern crate clap;
 use clap::{Arg, App};
@@ -20,7 +20,7 @@ fn main() {
     let yaml_config = matches.value_of("config").unwrap_or("test.yaml").to_string();
     let config = Config::new(yaml_config).unwrap();
     let mut ext_ins_helper = ExtIns::new(&config);
-    let mut vec_buf: Vec<String> = vec![];
+    let mut vec_buf: Vec<String>;
     let mut str_buf = String::new();
     let stdin = io::stdin();
     for line in stdin.lock().lines() {

@@ -6,7 +6,7 @@
 extern crate protoc_rust_grpc;
 
 fn main() {
-    let proto_root = "src/proto";
+    // let proto_root = "src/proto";
     protoc_rust_grpc::Codegen::new()
         .out_dir("src/proto")
         .input("src/proto/feature.proto")

@@ -1325,7 +1325,7 @@ dependencies = [
  "hyper",
  "lazy_static",
  "listenfd",
- "log 0.3.9",
+ "log 0.4.11",
  "murmurhash64",
  "pin-project 0.4.27",
  "prost",

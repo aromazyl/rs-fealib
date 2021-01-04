@@ -1,12 +1,12 @@
 mod engine;
-use engine::Engine;
-use crate::feature::{MulFeaDef, FeaDef, MulScore, Score};
-use crate::config::{Config};
+use crate::feature::{MulFeaDef, MulScore, Score};
 use std::io::{self, BufRead};
 use ::dubble::DoubleBuffered;
 use crate::ext_ins::ExtIns;
 use std::collections::HashMap;
 extern crate log;
+#[allow(unused_assignments)]
+#[allow(unused_imports)]
 use log::{info, trace, warn};
 
 
@@ -32,13 +32,13 @@ impl LrEngine {
         }
         self.cur_version = version.clone();
         let f = std::fs::File::open(conf).unwrap();
-        let mut vec_buf: Vec<String> = vec![];
+        let mut vec_buf: Vec<String>;
         self.fea_weighteds.clear();
-		for line in io::BufReader::new(f).lines() {
-			let line = line.unwrap();
-			if line.trim().len() == 0 {
-				continue;
-			}
+        for line in io::BufReader::new(f).lines() {
+            let line = line.unwrap();
+            if line.trim().len() == 0 {
+                continue;
+            }
             vec_buf = line.split("\t").into_iter().map(|x|x.to_string()).collect::<Vec<String>>();
             self.fea_weighteds.insert(vec_buf[0].parse::<u64>().unwrap(),
                     vec_buf[1].parse::<f32>().unwrap());
@@ -65,13 +65,13 @@ impl LrEngine {
                         }
                     }
                 }
-                if (score > 0.0f32) {
+                if score > 0.0f32 {
                     score = 1.0f32 / (1.0f32+(-score).exp());
                 } else {
                     score = score.exp() / (1.0f32+score.exp());
                 }
             } else {
-                //warn!("unable to extract ins sid = {}, feature {:?}", sid, mul_feas);
+                warn!("unable to extract ins sid = {}, feature {:?}", sid, mul_feas);
             }
             let mut _score = Score::new();
             _score.set_val(score);
